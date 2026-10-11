@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="zh-Hant"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>《台灣步行挑戰賽》規格書</title>
+<style>
+:root{--bg:#f6f4ee;--fg:#22211f;--muted:#6b675e;--line:#d9d4c7;--accent:#c0392b;--card:#fffdf8;--code:#ece8dc}
+@media (prefers-color-scheme:dark){:root{--bg:#1b1a18;--fg:#ece9e1;--muted:#a49f93;--line:#3a3833;--accent:#ff7a66;--card:#24231f;--code:#2f2d28}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.75 -apple-system,"PingFang TC","Noto Sans TC","Microsoft JhengHei",sans-serif}
+main{max-width:880px;margin:0 auto;padding:48px 16px 80px}
+h1{font-size:2rem;line-height:1.3;margin:0 0 16px;border-left:8px solid var(--accent);padding-left:14px}
+h2{font-size:1.4rem;margin:40px 0 12px;color:var(--accent)}
+h3{font-size:1.1rem;margin:28px 0 8px}
+hr{border:0;border-top:1px dashed var(--line);margin:32px 0}
+blockquote{margin:16px 0;padding:8px 18px;background:var(--card);border-left:4px solid var(--accent);border-radius:4px}
+blockquote p{margin:6px 0}
+code{background:var(--code);padding:1px 6px;border-radius:4px;font-size:.9em}
+pre.flow{background:var(--card);border:1px solid var(--line);padding:16px;border-radius:6px;overflow-x:auto;font:14px/1.6 ui-monospace,Menlo,monospace}
+.tw{overflow-x:auto;margin:12px 0}
+table{border-collapse:collapse;width:100%;background:var(--card);font-size:.95rem}
+th,td{border:1px solid var(--line);padding:8px 10px;text-align:left;vertical-align:top}
+th{background:var(--code)}
+ul{padding-left:1.4em} li{margin:4px 0}
+</style></head><body><main>
+<h1>《台灣步行挑戰賽》規格書</h1>
+<blockquote><p>一款用黑色幽默呈現台灣人行環境困境的互動網頁小遊戲。</p><p>交付物：單一 <code>index.html</code>（CSS、JavaScript 皆內嵌），發佈於 GitHub Pages。</p></blockquote>
+<hr>
+<h2>1. 作品目標</h2>
+<ul>
+<li><strong>核心訊息</strong>：台灣的人行環境對輪椅使用者、推嬰兒車的家長、長者來說「根本走不了」，連年輕人也不安全。這不是使用者的問題，而是道路設計的問題。</li>
+<li><strong>表達手法</strong>：玩家實際「走一段台灣的路」，遊戲刻意設計成<strong>無法通關</strong>；接著用同一角色走日本、荷蘭的同一段路，<strong>輕鬆通關</strong>，用反差說話。</li>
+<li><strong>語氣</strong>：諷刺、黑色幽默，用官腔口吻包裝荒謬。真實數據只在結尾輕輕帶出，不說教。</li>
+<li><strong>目標體驗時間</strong>：約 5 分鐘（一輪約 3 分鐘，多數玩家會換角色再玩一次；成就系統鼓勵重玩）。</li>
+<li><strong>操作裝置</strong>：電腦（鍵盤 + 滑鼠）。</li>
+</ul>
+<hr>
+<h2>2. 頁面流程</h2>
+<pre class="flow">[S1 開場] → [S2 選角色] → [S3 台灣關卡（必定失敗）] → [S4 陣亡結算]
+                                                          ↓
+              [S7 現實頁] ← [S6 通關結算] ← [S5 移民模式：日本 / 荷蘭]
+                  ↓
+        「換個角色再試一次」→ 回到 S2</pre>
+<div class="tw"><table><thead><tr><th>編號</th><th>畫面</th><th>時間</th><th>內容</th></tr></thead><tbody><tr><td>S1</td><td>開場</td><td>約 30 秒</td><td>虛構機關「行人友善城市體驗推廣局」的官方歡迎詞，例如「台灣人行環境已達國際一流水準，請安心體驗。」按「開始體驗」進入。</td></tr><tr><td>S2</td><td>選角色</td><td>約 20 秒</td><td>4 張像素角色卡，各附能力值與一句諷刺說明。</td></tr><tr><td>S3</td><td>台灣關卡</td><td>1～2 分鐘</td><td>3 段路況，橫向捲軸，詳見第 4 節。</td></tr><tr><td>S4</td><td>陣亡結算</td><td>約 20 秒</td><td>以「完賽證書」形式呈現死因與統計。</td></tr><tr><td>S5</td><td>移民模式</td><td>約 30～70 秒</td><td>玩家選日本或荷蘭，用同一角色走同一段距離，自己操作。</td></tr><tr><td>S6</td><td>通關結算</td><td>約 10 秒</td><td>顯示通關時間，並與台灣的「陣亡」並列比較。</td></tr><tr><td>S7</td><td>現實頁</td><td>約 30 秒</td><td>三國數據比較表 + 兩句收尾句 + 按鈕。</td></tr></tbody></table></div>
+<hr>
+<h2>3. 角色（4 位）</h2>
+<div class="tw"><table><thead><tr><th>角色</th><th>移動速度</th><th>特性</th><th>角色卡說明（諷刺文案）</th></tr></thead><tbody><tr><td>♿ 輪椅使用者</td><td>中</td><td><strong>完全無法</strong>通過任何高低差</td><td>「上半身練得很壯，因為每天都在找斜坡。」</td></tr><tr><td>👶 推嬰兒車的家長</td><td>中</td><td>可按空白鍵<strong>抬車</strong>過台階（每次消耗 25 體力）；被機車按喇叭時寶寶會哭（哭鬧值上升）</td><td>「附贈一位隨時會被喇叭吵醒的寶寶。」</td></tr><tr><td>🦯 拄拐杖的長者</td><td>慢（50%）</td><td>抬腳過台階需長按空白鍵 2 秒；行人綠燈秒數永遠不夠</td><td>「綠燈 15 秒，您的步速需要 40 秒，請加油。」</td></tr><tr><td>🧑 一般年輕人（對照組）</td><td>快</td><td>可以跳過所有台階，看起來是簡單模式</td><td>「簡單模式。理論上。」</td></tr></tbody></table></div>
+<hr>
+<h2>4. 遊戲機制（S3 / S5 共用）</h2>
+<h3>4.1 畫面與操作</h3>
+<ul>
+<li><strong>斜上方 3/4 立體視角</strong>的橫向捲軸（像素風），畫布 960 × 540（依視窗等比縮放）。鏡頭從左前上方看街道，所有物體都有頂面、前面和側面（走過去會撞上的那一面），並且有地面陰影，讓高低差和路上的東西一眼看得出來。</li>
+<li>畫面分成兩條「道」：</li>
+<ul>
+<li><strong>上道</strong>：騎樓／人行道（行人該走的地方）</li>
+<li><strong>下道</strong>：靠人行道的車道。台灣、荷蘭靠右行駛，車流<strong>迎面而來</strong>；日本靠左行駛，車流從背後來</li>
+<li>畫面最下方另有一條對向車道（背景車流，不會撞到玩家）</li>
+</ul>
+<li>操作：<code>←</code> <code>→</code> 移動、<code>↑</code> <code>↓</code> 切換上道／下道、<code>空白鍵</code> 動作（抬車、抬腳、跳）、<code>C</code> 打 1999 陳情、<code>Esc</code>（或 <code>P</code>）暫停、<code>M</code> 靜音。</li>
+<li>畫面上方 HUD：關卡名稱、<strong>體力</strong>條、<strong>危險值</strong>條、已用時間；嬰兒車角色多一條<strong>寶寶哭鬧值</strong>；右上角有「⏸ 選單」按鈕。</li>
+<li><strong>暫停／離開</strong>：遊戲中按 <code>Esc</code> 或 <code>P</code>、點「⏸ 選單」，或切到別的視窗／分頁時，遊戲會暫停並顯示選單：<strong>繼續走</strong>、<strong>重新走這一關</strong>、<strong>換個角色</strong>（回 S2）、<strong>離開，回到首頁</strong>（回 S1）。暫停時時間完全停止。</li>
+</ul>
+<h3>4.2 數值規則</h3>
+<ul>
+<li><strong>危險值</strong>（0～100）：待在車道時每秒 +2.5；車輛擦身而過 +5；被莽撞的車撞上 +30（撞上前頭上會閃紅色「!!」）；被倒車機車撞 +20；達到 100 → 陣亡。每進入下一段，危險值減半（「台灣限定優惠」），讓玩家有機會看完三段路。</li>
+<li><strong>體力</strong>（0～100）：抬車、抬腳、爬路緣時消耗，每秒回復 6 點。體力不足時無法通過台階，只能走車道。</li>
+<li><strong>從車道爬回上道</strong>：輪椅只能在「沒被機車擋住的斜坡」爬上去；嬰兒車、長者在沒被佔住的斜坡免體力，其他地方爬路緣每次消耗 15 體力；年輕人不受限。<strong>被機車佔住的斜坡，所有角色都不能從那裡上下</strong>（會顯示「斜坡上停了一台機車」）。日本、荷蘭沒有這個限制。</li>
+<li><strong>水溝蓋（只在台灣）</strong>：人行道上共有 6 個鐵格柵水溝蓋。走到水溝蓋前按 <code>空白鍵</code> 可以跨過去（年輕人跳過，免費；嬰兒車、長者消耗 10 體力；輪椅無法跳，只能改走車道）。沒跨過去就會<strong>卡住</strong>，無法移動，必須<strong>連按 <code>←</code> <code>→</code></strong> 掙脫（輪椅 8 下、嬰兒車 6 下、長者 5 下、年輕人 3 下）。卡住期間每 2.4 秒會有機車在後面按喇叭（寶寶哭鬧值上升）。是否冒險走人行道，由玩家決定。</li>
+<li><strong>1999 陳情</strong>：按 <code>C</code> 打電話陳情，會收到一句官腔回覆（每 5 秒一次），什麼都不會改變，但站著等回覆可以順便休息（體力 +10）。日本、荷蘭關卡打電話會得到「沒有什麼需要陳情的」。</li>
+<li><strong>隨機路況事件（每次開局重新抽籤）</strong>：台灣關卡有 7 個固定「事件欄位」，每次開局隨機決定各欄位發生什麼事（或什麼都沒有），所以每一輪的路都不一樣：</li>
+<ul>
+<li><strong>停車場出入口</strong>：牆上有鐵捲門與警示燈。走近時警示燈閃爍並發出嗶聲，約 1.5 秒後車子衝出來穿過人行道開到車道上。車子出來時站在它的路徑上會被撞（+30 危險值）。玩家要決定：等它先走，還是搶在它出來之前衝過去。</li>
+<li><strong>網紅擋路</strong>：網紅站在人行道正中間拍照打卡，所有角色都過不去。對他按 <code>空白鍵</code> 喊「借過」，連喊 3 次他才會讓開。</li>
+<li><strong>施工圍籬</strong>：圍籬橫跨整條人行道，所有角色（包含年輕人）都只能下車道。每輪最多 2 個。</li>
+</ul>
+<li><strong>路人</strong>：街上有路人，玩家靠近時說一句話（台灣：「你為什麼不搭計程車？」「我們有在規劃，已經規劃十年了。」等；日本、荷蘭：「需要幫忙嗎？」「慢慢來，我們等你。」），不會擋路。</li>
+<li><strong>「根本過不去」設計</strong>：每段路至少有一個障礙，對所選角色來說<strong>無論怎麼操作都過不去</strong>，玩家只能下到車道。第 3 段路口為<strong>必死劇本</strong>（見下文），保證所有角色都無法通關。</li>
+</ul>
+<h3>4.3 三段台灣路況</h3>
+<div class="tw"><table><thead><tr><th>段落</th><th>障礙（台灣）</th><th>對玩家的效果</th></tr></thead><tbody><tr><td><strong>第 1 段：騎樓</strong>（二樓樓板蓋在上方、靠馬路一側有一排柱子）</td><td>① 每家店地板高度不同，交界處有黃黑警示條的台階 ② 機車停滿騎樓，完全擋住 ③ 店家商品、攤位佔用 ④ 機車突然從騎樓倒車出來 ⑤ 路緣斜坡（藍色無障礙標誌）上停了機車</td><td>①輪椅無法通過；其他角色消耗體力 ②③所有角色只能下車道 ④碰撞 +危險值 ⑤輪椅無法從這裡回到騎樓</td></tr><tr><td><strong>第 2 段：人行道</strong></td><td>① 電線桿、變電箱擋在正中間 ② 樹根把地面頂起 ③ 只剩 30 公分寬的人行道 ④ <strong>機車在人行道上騎</strong>，從背後衝來按喇叭 ⑤ 導盲磚直接通往電線桿（視覺梗）</td><td>①③輪椅與嬰兒車過不去 ②需要抬車或抬腳 ④必須閃避，否則 +危險值；嬰兒哭鬧</td></tr><tr><td><strong>第 3 段：標線型人行道＋路口</strong>（玩家沿人行道穿越一條巷子）</td><td>① <strong>標線型人行道</strong>（外觀參考真實照片，見 §6）：台階下去後，路緣消失，緊貼騎樓鐵門的一條青綠色油漆，外側是白實線與紅線，沒有高度、沒有護欄。<strong>車子、機車直接停在綠線上</strong>（3 個停放位置，每個 75% 出現，轎車、小貨車或一排機車），所有角色都只能下車道繞過去；還會有機車從背後騎過來。這一段沒有路緣，上下道不受斜坡限制 ② <strong>巷口違停貨車與建案看板擋住巷子</strong>，看不到巷內來車 ③ 行人綠燈只有 15 秒 ④ 巷子裡的車不讓行人</td><td><strong>必死劇本，共 3 種結局，每次隨機抽、不會連續兩次一樣</strong>：&lt;br&gt;① <strong>右轉車</strong>：巷內的車從貨車與看板後方駛出，撞到人後照樣右轉開走&lt;br&gt;② <strong>外送員</strong>：巷內衝出一台外送機車（「系統說我只剩 3 分鐘」）&lt;br&gt;③ <strong>招牌掉落</strong>：三樓生鏽的鐵招牌掉下來（地上先出現陰影，玩家已來不及閃避）&lt;br&gt;若玩家停在路緣不走，綠燈結束後會被後方機車逼出，結果相同。</td></tr></tbody></table></div>
+<h3>4.4 陣亡結算（S4）——「完賽證書」</h3>
+<ul>
+<li>內容：角色、存活時間、被迫走車道次數、被按喇叭次數、被水溝蓋卡住次數、1999 陳情次數、死因。死因共 7 種：右轉車、外送員、招牌掉落（路口結局）；車道被撞、人行道被機車撞、停車場出口的車、倒車機車（危險值提早滿格時）。</li>
+<li><strong>荒謬成就（共 13 個）</strong>：結算時顯示本次新解鎖的成就、累計進度與「下一個目標」，鼓勵玩家換角色再玩。累計紀錄存在瀏覽器 <code>localStorage</code>（讀寫失敗時只在本次有效）。</li>
+<li>死因依角色與情境顯示不同文案，例如：</li>
+<ul>
+<li>「死因：騎樓台階 12 公分。您的輪椅不支援台灣規格。」</li>
+<li>「死因：從巷子右轉出來的車表示『我沒看到你』。」</li>
+<li>「恭喜您成為交通部年度統計中的一個數字。」</li>
+</ul>
+<li>按鈕：「👉 試試看在別的國家走同一段路？」→ S5。</li>
+</ul>
+<div class="tw"><table><thead><tr><th>成就</th><th>條件</th></tr></thead><tbody><tr><td>喇叭收藏家</td><td>一趟被按喇叭 6 次以上</td></tr><tr><td>車道常客</td><td>一趟被迫走車道 4 次以上</td></tr><tr><td>水溝蓋的邂逅</td><td>被水溝蓋卡住一次</td></tr><tr><td>水溝蓋的老朋友</td><td>一趟被卡住 3 次以上</td></tr><tr><td>陳情達人</td><td>一趟打 1999 陳情 3 次以上</td></tr><tr><td>閃電陣亡</td><td>30 秒內陣亡</td></tr><tr><td>人行道上的意外</td><td>在人行道上被機車撞到</td></tr><tr><td>四種人生</td><td>四種身分各陣亡一次</td></tr><tr><td>簽證辦好了</td><td>走完日本關卡</td></tr><tr><td>騎單車的人生</td><td>走完荷蘭關卡</td></tr><tr><td>請注意車輛出入</td><td>被停車場出口的車撞到</td></tr><tr><td>借過達人</td><td>一趟成功請網紅讓路 2 次</td></tr><tr><td>死法收集家</td><td>看過 4 種不同的死法</td></tr></tbody></table></div>
+<h3>4.5 移民模式（S5）</h3>
+<ul>
+<li>玩家選擇 🇯🇵 日本 或 🇳🇱 荷蘭，使用<strong>同一角色</strong>，走<strong>相同長度</strong>的三段路，<strong>自己操作</strong>。</li>
+<li>沒有任何過不去的障礙，約 30～40 秒可抵達終點（長者約 70 秒）。車輛會停下來等行人，不會增加危險值。畫面上方固定顯示：「⚠️ 本關卡過於簡單，不適合台灣玩家」。</li>
+</ul>
+<div class="tw"><table><thead><tr><th>段落</th><th>🇯🇵 日本</th><th>🇳🇱 荷蘭</th></tr></thead><tbody><tr><td>第 1 段</td><td>平整連續的人行道，無高低差</td><td>人行道、自行車道、車道三者分離</td></tr><tr><td>第 2 段</td><td>電線地下化，無電線桿；導盲磚連續</td><td>生活街道（woonerf），車輛速限 15 km/h</td></tr><tr><td>第 3 段</td><td>路緣有緩坡；巷子裡的車停在斑馬線前，等行人走過才轉彎</td><td>路口設行人安全島，視線無遮蔽；巷子裡的車停下來等行人</td></tr></tbody></table></div>
+<ul>
+<li><strong>通關結算（S6）</strong>：「通關時間 0:38｜在台灣：陣亡」並列顯示，並顯示成就進度。</li>
+</ul>
+<hr>
+<h2>5. 現實頁（S7）</h2>
+<p>三國比較表（數據輕描淡寫，附出處）：</p>
+<div class="tw"><table><thead><tr><th>項目</th><th>🇹🇼 台灣</th><th>🇯🇵 日本</th><th>🇳🇱 荷蘭</th></tr></thead><tbody><tr><td>每十萬人交通死亡數（30 日內死亡）</td><td>約 12.6（2024）</td><td>約 2.6（2022）</td><td>約 3.8（2023）</td></tr></tbody></table></div>
+<p>另附一行：「2024 年，台灣有 366 位行人死於交通事故。」</p>
+<p>收尾句（依序淡入）：</p>
+<blockquote><p>你玩了五分鐘就可以關掉，有些人每天都得走這條路。</p><p>我們都坐過嬰兒車，也都會變老。</p></blockquote>
+<p>按鈕：「換個角色再試一次」（回到 S2）、「回到首頁」（回到 S1）。</p>
+<p><strong>資料來源</strong>：交通部 2024 年道路交通事故統計（工商時報 2025/3/5 報導）；ITF/OECD Japan Road Safety Country Profile；SWOV（荷蘭道路安全研究院）2023 年道路死亡統計。台灣每十萬人比率以 2,950 人 ÷ 約 2,340 萬人口計算。</p>
+<hr>
+<h2>6. 視覺與音效</h2>
+<ul>
+<li><strong>視覺</strong>：像素風 + 斜上方立體視角（見 §4.1）。所有圖像用 Canvas 程式繪製，不引用外部圖檔。介面文字使用系統中文字體；畫布設定 <code>image-rendering: pixelated</code>。</li>
+<li><strong>讓高低差看得見的手法</strong>：</li>
+<ul>
+<li>每家店的地板高度不同，地板會真的墊高，交界處露出側面，並畫黃黑警示條；下台階處地板上有陰影。</li>
+<li>台階前方浮出高度標示（例如「↑ 18 cm」「↓ 24 cm」），走近才顯示。</li>
+<li>路緣有明顯的立面。</li>
+<li><strong>斜坡</strong>：路緣切出一塊亮黃色的斜面，伸進車道，邊緣有黃色線、斜面上畫藍色向上箭頭，旁邊立藍色輪椅標誌；走近時上方浮出「♿ 斜坡」標籤（被機車佔住的顯示紅色「斜坡（被機車占用）」並看得到機車停在斜面上）。輪椅走在車道上時，可用的斜坡下方會閃黃色箭頭。</li>
+<li>為了看得清楚，高度刻意誇張（1 單位約 3 公分，角色比例不變）。</li>
+</ul>
+<li><strong>讓「路上有東西」看得見的手法</strong>：停滿機車的騎樓排成好幾列、騎樓有樓板和柱子（角色走過會被柱子擋住）、電線桿旁加上垃圾桶與腳踏車、窄人行道旁堆滿貨架與花台；所有物體都有陰影。</li>
+<li><strong>標線型人行道的畫法</strong>（參考臺中市〈標線型人行道繪製指引〉、新聞與網路上的實景照片）：</li>
+<ul>
+<li>顏色為青綠色（偏藍的綠，不是草綠），油漆有些斑駁、有路邊排水溝蓋。</li>
+<li>緊貼騎樓或店面的鐵捲門，沒有路緣石；外側是一條<strong>白實線</strong>，白線外再一條<strong>紅線</strong>（禁止臨時停車）。</li>
+<li>路面上以白色漆標出「<strong>人行道</strong>」三個字與「<strong>大人牽小孩</strong>」的行人圖示，每隔一段重複。</li>
+<li>路口的斑馬線是綠白相間。</li>
+<li>車子、機車壓在白線上停放（實景常見），行人只好走到旁邊的車道。</li>
+<li>這種人行道依規定只能設在巷道、集散道路等服務性道路；本作品為了諷刺效果，把它放在路口前。</li>
+</ul>
+<li><strong>文字清晰</strong>：畫面中的文字（高度標示、斜坡與水溝蓋標籤、路人對話泡泡）不畫在低解析度的像素畫布上，而是畫在另一層以螢幕實際解析度繪製的透明畫布，字體清楚不糊。</li>
+<li><strong>配色</strong>：台灣關卡用灰暗、雜亂的色調（招牌紅黃綠混雜）；日本、荷蘭關卡用乾淨明亮的色調，強化反差。</li>
+<li><strong>音效</strong>：除寶寶哭聲外，全部用 Web Audio API 即時合成。寶寶哭聲合成出來不像人聲，因此改用真實錄音：從公眾領域錄音裁出約 1.4 秒、壓成單聲道 MP3（約 8 KB），以 base64 文字直接嵌在 <code>index.html</code> 內，不引用外部檔案。若瀏覽器解碼失敗，退回合成版。</li>
+</ul>
+<div class="tw"><table><thead><tr><th>音效</th><th>觸發時機</th></tr></thead><tbody><tr><td>機車喇叭「叭叭」（雙音、較圓，兩聲）</td><td>機車接近玩家時；卡在水溝蓋時後方按喇叭</td></tr><tr><td>汽車喇叭「叭——」（較低沉、持續約 0.75 秒）</td><td>汽車、貨車接近玩家時；停車場出口的車衝出來時</td></tr><tr><td>引擎聲</td><td>待在車道時持續播放</td></tr><tr><td>碰撞聲</td><td>被擦撞時</td></tr><tr><td>寶寶哭聲「哇——」（真實錄音，約 1.4 秒）</td><td>嬰兒車角色的哭鬧值超過 60 時</td></tr><tr><td>行人號誌倒數「嗶嗶」</td><td>第 3 段綠燈倒數時</td></tr><tr><td>陣亡音（低沉）</td><td>進入 S4</td></tr><tr><td>勝利音（輕快）</td><td>移民模式通關時</td></tr></tbody></table></div>
+<ul>
+<li>右上角提供🔊／🔇 按鈕，或按 <code>M</code> 切換靜音。</li>
+<li><strong>音量控制</strong>：所有音效的最大音量大致相同（撞擊聲不會比喇叭大聲很多），總輸出另加限幅器，多個音效疊在一起也不會突然爆音。</li>
+</ul>
+<hr>
+<h2>7. 技術規格</h2>
+<ul>
+<li><strong>單一檔案</strong> <code>index.html</code>：CSS 寫在 <code>&lt;style&gt;</code>、JavaScript 寫在 <code>&lt;script&gt;</code>，不依賴任何外部資源，離線也能開啟。</li>
+<li>使用 <code>&lt;canvas&gt;</code> + <code>requestAnimationFrame</code> 實作遊戲迴圈；以狀態機管理 S1～S7 畫面切換。</li>
+<li>音效需在玩家第一次點擊後才啟動（符合瀏覽器自動播放限制）。</li>
+<li>支援 Chrome、Edge、Safari、Firefox 最新版；最低解析度 1280 × 720。</li>
+<li>發佈：上傳至 GitHub repository，開啟 GitHub Pages，網址根目錄即為遊戲。</li>
+</ul>
+<hr>
+<h2>8. 驗收清單（作品與規格對應）</h2>
+<div class="tw"><table><thead><tr><th>#</th><th>驗收項目</th><th>對應章節</th></tr></thead><tbody><tr><td>1</td><td>開啟 <code>index.html</code> 即顯示開場畫面，可按鈕進入</td><td>§2 S1</td></tr><tr><td>2</td><td>可選擇 4 位角色，各有不同速度與特性</td><td>§3</td></tr><tr><td>3</td><td>方向鍵、空白鍵、<code>C</code>、<code>Esc</code>、<code>M</code> 鍵皆可操作</td><td>§4.1</td></tr><tr><td>4</td><td>HUD 顯示體力、危險值、時間（嬰兒車另有哭鬧值）</td><td>§4.1</td></tr><tr><td>5</td><td>三段台灣路況的障礙皆出現，且各角色至少遇到一個過不去的障礙</td><td>§4.3</td></tr><tr><td>6</td><td>人行道上有機車行駛；騎樓有柱子與高低差（含黃黑警示條與高度標示）；斜坡有標誌；巷口被貨車與看板遮擋，巷內車右轉撞人</td><td>§4.1、§4.3、§6</td></tr><tr><td>7</td><td>所有角色在台灣關卡都必定陣亡，並顯示對應死因的完賽證書</td><td>§4.2、§4.4</td></tr><tr><td>8</td><td>可進入移民模式，選日本或荷蘭並自己操作通關</td><td>§4.5</td></tr><tr><td>9</td><td>通關結算與台灣結果並列顯示</td><td>§4.5 S6</td></tr><tr><td>10</td><td>現實頁顯示數據表、出處與兩句收尾句</td><td>§5</td></tr><tr><td>11</td><td>音效正常播放，可靜音</td><td>§6</td></tr><tr><td>12</td><td>全部內容在單一 <code>index.html</code> 內，無外部資源</td><td>§7</td></tr><tr><td>13</td><td>遊戲中可暫停，並能繼續、重新開始、換角色或離開回首頁</td><td>§4.1</td></tr><tr><td>14</td><td>水溝蓋會卡住角色，連按 ← → 可掙脫；<code>C</code> 可陳情並得到回覆；路人會說話</td><td>§4.2</td></tr><tr><td>14a</td><td>停車場出入口（警示燈後車子衝出）、網紅擋路（喊借過）、施工圍籬會隨機出現在不同位置</td><td>§4.2</td></tr><tr><td>14b</td><td>路口有 3 種不同結局（右轉車、外送員、招牌掉落），不會連續兩次相同</td><td>§4.3</td></tr><tr><td>14d</td><td>標線型人行道（青綠色、白線＋紅線、「人行道」字樣與圖示）上有違停車輛與機車，所有角色都只能下車道繞過</td><td>§4.3、§6</td></tr><tr><td>14e</td><td>畫面中的文字清晰可讀</td><td>§6</td></tr><tr><td>14c</td><td>路緣斜坡以亮黃色斜面呈現，走近時有「♿ 斜坡」標籤；被機車佔住的斜坡所有角色都上下不了</td><td>§4.2、§6</td></tr><tr><td>15</td><td>證書與通關結算顯示成就與累計進度</td><td>§4.4</td></tr></tbody></table></div>
+<hr>
+<h2>9. 參考資料（標線型人行道的外觀）</h2>
+<ul>
+<li>臺中市〈標線型人行道繪製指引〉（依《道路交通標誌標線號誌設置規則》人行道標線與綠色色樣繪製：人行道起點與路口標繪白字「人行道」與圖示、外側設禁停線）。</li>
+<li>8891 新聞：標線型人行道寬度宜 1.5 公尺以上，路緣畫禁止臨時停車紅線或禁止停車黃線；僅可設於集散道路、巷道等服務性道路。</li>
+<li>公視新聞網〈標線型人行道縮減路寬 區隔不易常遭占用〉（2022/11/6）。</li>
+<li>自由時報、TVBS 等新聞所附的現場照片（綠色鋪面、白實線與紅線、「人行道」字樣與大人牽小孩圖示、車輛直接停放）。</li>
+</ul>
+<h2>10. 參考資料（寶寶哭聲錄音）</h2>
+<ul>
+<li>Wikimedia Commons〈Baby long wanting cry.ogg〉，作者 natalie，授權為公眾領域。本作品裁取其中約 1.4 秒（約 16 到 17.5 秒處），轉成單聲道 MP3 後嵌入網頁。</li>
+</ul>
+</main></body></html>
